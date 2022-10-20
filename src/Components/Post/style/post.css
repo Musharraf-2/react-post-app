@@ -1,0 +1,15 @@
+.post {
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 10px;
+}
+
+.posts {
+  height: 700px;
+  overflow: scroll;
+  border: 3px outset rgb(63, 63, 63);
+  border-radius: 10px;
+}
+
+.post-update-form {
+  display: none;
+}
