@@ -1,0 +1,14 @@
+.comment-div {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.comment-edit-btn,
+.comment-delete-btn {
+  background-color: transparent;
+  border: none;
+}
+
+.update-comment-form {
+  display: none;
+}

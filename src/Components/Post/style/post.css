@@ -13,3 +13,14 @@
 .post-update-form {
   display: none;
 }
+
+#edit-btn,
+#comment-btn,
+#delete-btn {
+  background-color: transparent;
+  border: none;
+}
+
+.comments-div {
+  display: none;
+}

@@ -1,7 +1,18 @@
-import { Link } from 'react-router-dom';
-import { currentUser } from '../../Pages/Signup';
+import { Link, useNavigate } from 'react-router-dom';
+import { CURRENT_USER } from '../../Pages/Signup';
 
-const Navbar = () => {
+function Navbar(props) {
+  const navigate = useNavigate();
+
+  const signoutUser = () => {
+    CURRENT_USER.email = null;
+    CURRENT_USER.username = null;
+    CURRENT_USER.password = null;
+    CURRENT_USER.userId = null;
+    props.setIsLoggedIn(!props.isLoggedIn)
+    navigate("/");
+  }
+
   return (
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
       <div className='container'>
@@ -14,7 +25,7 @@ const Navbar = () => {
             <li className="nav-item">
               <Link to="/" className='nav-link'>Posts</Link>
             </li>
-            {Object.keys(currentUser).length === 0 ?
+            {!props.isLoggedIn ?
               <>
                 <li className="nav-item">
                   <Link to="/signin" className='nav-link'>Sign in</Link>
@@ -24,7 +35,7 @@ const Navbar = () => {
                 </li>
               </> :
               <li className="nav-item">
-                <span className='nav-link'>Sign out</span>
+                <span className='nav-link' onClick={signoutUser}>Sign out</span>
               </li>
             }
           </ul>

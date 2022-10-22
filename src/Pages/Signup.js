@@ -2,22 +2,26 @@ import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
 export const USERS = {};
-export const currentUser = {};
+export const CURRENT_USER = { email: null, username: null, password: null, userId: null };
 
-function Signup() {
+function Signup(props) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignIn = (e) => {
+  const handleSignUp = e => {
     e.preventDefault();
     if (email in USERS) {
       alert(`This email is already taken.`);
     }
     else {
       USERS[email] = { username: username, password: password, userId: Object.keys(USERS).length + 1 };
-      currentUser[0] = { email: email, username: username, password: password, userId: USERS[email].userId };
+      CURRENT_USER.email = email;
+      CURRENT_USER.username = username;
+      CURRENT_USER.password = password;
+      CURRENT_USER.userId = USERS[email].userId;
+      props.setIsLoggedIn(!props.isLoggedIn)
       navigate("/");
     }
   }
@@ -27,7 +31,7 @@ function Signup() {
       <div className="col-4 text-center">
         <h2 className="text-center mt-4">Sign up</h2>
         <br />
-        <form onSubmit={e => handleSignIn(e)}>
+        <form onSubmit={e => handleSignUp(e)}>
           <input className="form-control" type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} required />
           <br />
           <input className="form-control" type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} required />
